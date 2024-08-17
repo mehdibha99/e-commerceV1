@@ -1,8 +1,8 @@
 import { useTheme } from "@emotion/react";
 import {
-  Inbox,
+  Close,
+  ExpandMore,
   KeyboardArrowRightOutlined,
-  Mail,
   Menu as MenuIcon,
   Window,
 } from "@mui/icons-material";
@@ -11,10 +11,11 @@ import LaptopChromebookOutlinedIcon from "@mui/icons-material/LaptopChromebookOu
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
 import {
+  Accordion,
+  AccordionSummary,
   Box,
   Button,
   Container,
-  Divider,
   IconButton,
   List,
   ListItem,
@@ -23,10 +24,13 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Stack,
   SwipeableDrawer,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useState } from "react";
+import LinksDesktop from "./LinksDesktop";
 
 const MenuComponent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -52,46 +56,13 @@ const MenuComponent = () => {
     setOpenDrawer(open);
   };
 
-  const list = () => (
-    <Box
-      sx={{ width: "auto", height: "100vh" }}
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <Inbox /> : <Mail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <Inbox /> : <Mail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <Container
       sx={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        mt: 5,
       }}
     >
       <Box>
@@ -104,7 +75,6 @@ const MenuComponent = () => {
           sx={{
             width: "220px",
             bgcolor: theme.palette.myColor.main,
-            color: "inherit",
           }}
         >
           <Window />
@@ -174,20 +144,125 @@ const MenuComponent = () => {
           </MenuItem>
         </Menu>
       </Box>
-      <Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+        }}
+      />
+      {!useMediaQuery((theme) => theme.breakpoints.up("lg")) ? (
         <IconButton onClick={toggleDrawer(true)}>
           <MenuIcon />
         </IconButton>
-        <SwipeableDrawer
-          anchor="top"
-          open={openDrawer}
-          onClose={toggleDrawer(false)}
-          onOpen={toggleDrawer(true)}
+      ) : (
+        <Stack
+          display={"flex"}
+          direction={"row"}
+          alignItems={"center"}
+          spacing={3}
+        >
+          {[
+            "Home",
+            "Mega Menu",
+            "Full Menu Screan",
+            "User Account",
+            "Vendor Account",
+          ].map((title) => {
+            return <LinksDesktop key={title} title={title} />;
+          })}
+        </Stack>
+      )}
+
+      <SwipeableDrawer
+        anchor="top"
+        open={openDrawer}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+      >
+        <Box
           sx={{
-            ".MuiPaper-root": { height: "100vh" },
+            height: "100vh",
           }}
-        ></SwipeableDrawer>
-      </Box>
+        >
+          <Box
+            sx={{
+              position: "relative",
+              width: "80%",
+              mx: "auto",
+              minHeight: "300px",
+              padding: theme.spacing(2),
+              mt: 5,
+              pt: 10,
+            }}
+          >
+            <IconButton
+              sx={{
+                top: 8,
+                right: 20,
+                position: "absolute",
+                cursor: "pointer",
+                fontSize: "20px",
+                opacity: 0.8,
+                ":hover": {
+                  rotate: "180deg",
+                  transition: "0.3s",
+                },
+              }}
+              w
+              onClick={toggleDrawer(false)}
+            >
+              <Close
+                sx={{
+                  fontSize: "30px",
+                  color: theme.palette.text.secondary,
+                }}
+              />
+            </IconButton>
+
+            {[
+              "Home",
+              "Mega Menu",
+              "Full Menu Screan",
+              "User Account",
+              "Vendor Account",
+            ].map((menu) => {
+              return (
+                <Accordion
+                  key={menu}
+                  elevation={0}
+                  sx={{
+                    bgcolor: "initial",
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ExpandMore />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                  >
+                    {menu}
+                  </AccordionSummary>
+                  <List
+                    sx={{
+                      p: 0,
+                      m: 0,
+                    }}
+                  >
+                    <ListItem>
+                      <ListItemButton>
+                        <ListItemText primary="Link" />
+                      </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                      <ListItemButton>
+                        <ListItemText primary="Link" />
+                      </ListItemButton>
+                    </ListItem>
+                  </List>
+                </Accordion>
+              );
+            })}
+          </Box>
+        </Box>
+      </SwipeableDrawer>
     </Container>
   );
 };
