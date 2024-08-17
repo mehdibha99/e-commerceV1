@@ -1,5 +1,5 @@
 import Filter from "./Filter";
-import Menu from "./Menu";
+import Menu from "./MenuComponent";
 import TopBar from "./TopBar";
 
 const index = () => {
