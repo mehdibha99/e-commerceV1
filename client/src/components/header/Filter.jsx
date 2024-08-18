@@ -41,6 +41,7 @@ const Filter = () => {
     setAnchorEl(null);
   };
   const Search = styled("div")(({ theme }) => ({
+    flexGrow: 0.4,
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     "&:hover": {
@@ -54,8 +55,8 @@ const Filter = () => {
       marginLeft: theme.spacing(3),
       width: "auto",
     },
-    flexGrow: 0.4,
-    minWidth: "300px",
+
+    minWidth: "250px",
   }));
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -99,12 +100,13 @@ const Filter = () => {
         my: 3,
         display: "flex",
         justifyContent: "space-between",
+        gap: 2,
       }}
     >
       <Stack direction="column" alignItems="center">
         <ShoppingCartOutlined
           sx={{
-            fontSize: "30px",
+            fontSize: "20px",
             mx: "auto",
           }}
         />
@@ -158,6 +160,7 @@ const Filter = () => {
                     fontSize: "13px",
                     width: "95px",
                     textAlign: "center",
+                    my: "auto",
                     fontWeight: "700",
                   },
                 }}
@@ -185,6 +188,7 @@ const Filter = () => {
                 sx={{
                   fontSize: "11px",
                   padding: "8px 18px",
+                  my: "auto",
                   minHeight: "10px",
                   cursor: "pointer",
                   "&:hover": {
