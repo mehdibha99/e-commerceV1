@@ -75,6 +75,8 @@ const MenuComponent = () => {
           sx={{
             width: "220px",
             bgcolor: theme.palette.myColor.main,
+
+            color: theme.palette.text.secondary,
           }}
         >
           <Window />
