@@ -1,7 +1,10 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./Theme";
 import Header from "./components/header";
-import HeroSection from "./components/hero/HeroSection";
+import Hero from "./components/hero/";
+import Main from "./components/main/Main";
+import Footer from "./components/footer/Footer";
+import ScrollToTop from "./components/scrollToTop/ScrollToTop";
 function App() {
   const [theme, colorMode] = useMode();
   return (
@@ -10,8 +13,19 @@ function App() {
         <CssBaseline />
         <div className="App">
           <Header />
-          <HeroSection />
+          <Box
+            sx={{
+              bgcolor: theme.palette.bg.main,
+              paddingBottom: 4,
+            }}
+          >
+            <Hero />
+            <Main />
+          </Box>
+          <Footer />
         </div>
+
+        <ScrollToTop />
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

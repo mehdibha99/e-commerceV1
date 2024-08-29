@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Filter from "./Filter";
 import Menu from "./MenuComponent";
 import TopBar from "./TopBar";
