@@ -1,0 +1,12 @@
+.myButton {
+  border-radius: 5px !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  -o-border-radius: 5px !important;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border: 1px solid #888 !important;
+  text-transform: capitalize;
+  font-size: 16px;
+}
